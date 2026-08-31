@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #03060c;
+  color: #f3f4f6;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Background mesh aura accent glows */
+.glow-blur {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.06) 0%, rgba(3, 6, 12, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
