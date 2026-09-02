@@ -1,7 +1,9 @@
-import React from 'react';
-import hero.png from '../assets/hero.png';
+import React, { useEffect, useRef } from 'react';
+import hero from '../assets/hero.png';
 
 export default function Home() {
+  const sectionRef = useRef(null);
+
   const stats = [
     { value: '1+', label: 'Years', subLabel: 'Experience' },
     { value: '22+', label: 'Projects', subLabel: 'Completed' },
@@ -9,8 +11,45 @@ export default function Home() {
     { value: '70%', label: 'Client', subLabel: 'Satisfaction' },
   ];
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      threshold: 0.15, // Triggers when 15% of the section enters the screen
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Triggers appearance almost instantly (10ms delay) after crossing the scroll threshold
+          setTimeout(() => {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+          }, 100);
+
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+          }
+        }
+      });
+    }, observerOptions);
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="home" className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16 pb-20 items-center">
+    <section 
+      id="home" 
+      ref={sectionRef}
+      className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16 pb-20 items-center transform opacity-0 translate-y-8 transition-all duration-500 ease-out will-change-[opacity,transform]"
+    >
       
       {/* Left Content Column */}
       <div className="lg:col-span-7 flex flex-col space-y-6">
@@ -61,7 +100,7 @@ export default function Home() {
           
           {/* FIXED: Image source points directly to your public root folder asset */}
           <img 
-            src="/hero.png" 
+            src={hero} 
             alt="Ekram Portrait Workspace" 
             className="w-full h-[450px] object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700 ease-out"
           />

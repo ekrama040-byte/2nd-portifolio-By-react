@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Reusable Info Block Card
 function ContactInfoCard({ icon, label, value }) {
@@ -32,17 +32,53 @@ function SocialLink({ icon, url, title }) {
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const sectionRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form email processing or storage logic here
     console.log('Message Form Submitted Successfully:', formData);
     alert('Thank you! Your message has been sent successfully.');
     setFormData({ name: '', email: '', message: '' });
   };
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      threshold: 0.15,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+          }, 10);
+
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+          }
+        }
+      });
+    }, observerOptions);
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="contact" className="relative z-10 pt-20 pb-24 border-t border-gray-900/60 w-full flex flex-col items-center">
+    <section 
+      id="contact" 
+      ref={sectionRef}
+      className="relative z-10 pt-20 pb-24 border-t border-gray-900/60 w-full flex flex-col items-center transform opacity-0 translate-y-8 transition-all duration-500 ease-out will-change-[opacity,transform]"
+    >
       
       {/* Centered Descriptive Content Section Header */}
       <div className="text-center max-w-xl mb-14 flex flex-col items-center space-y-2">
@@ -101,7 +137,7 @@ export default function Contact() {
             />
           </div>
 
-          {/* Form Trigger Button: Glowing Accent Canvas Element */}
+          {/* Form Trigger Button */}
           <div className="pt-2">
             <button 
               type="submit"

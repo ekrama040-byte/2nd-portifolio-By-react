@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import a from '../assets/oberon-copeland-veryinformed-com-XtjLk9TRlE0-unsplash.jpg';
+import b from '../assets/slidebean-UWRn79hIQKY-unsplash.jpg';
+import c from '../assets/team-nocoloco-z41dNJVqSxo-unsplash.jpg';
 
 // Individual Project Card Sub-component
 function ProjectCard({ title, description, image, tags, category, demoUrl, githubUrl }) {
@@ -8,7 +11,7 @@ function ProjectCard({ title, description, image, tags, category, demoUrl, githu
       {/* Mockup Image Display Container Area */}
       <div className="relative w-full aspect-video bg-[#03060c] overflow-hidden border-b border-gray-900">
         <img 
-          src={image} 
+          src={a} 
           alt={`${title} Preview Mockup`} 
           className="w-full h-full object-cover brightness-90 group-hover:scale-105 group-hover:brightness-100 transition-all duration-500 ease-out"
         />
@@ -72,6 +75,7 @@ function ProjectCard({ title, description, image, tags, category, demoUrl, githu
 // Main Component
 export default function Project() {
   const [activeTab, setActiveTab] = useState('All');
+  const sectionRef = useRef(null);
 
   const tabs = [
     { id: 'All', label: 'All', icon: '🟢' },
@@ -84,7 +88,7 @@ export default function Project() {
     {
       title: "E-Commerce Platform",
       description: "Full-stack online shopping application with real-time payment handling system integrations, secure checkouts, and clean state pipelines.",
-      image: "https://unsplash.com",
+      image: "a",
       tags: ["React", "Node.js", "MongoDB"],
       category: "Full Stack",
       demoUrl: "https://example.com",
@@ -93,7 +97,7 @@ export default function Project() {
     {
       title: "Task Management Dashboard",
       description: "Collaborative project management tool featuring drag-and-drop kanban boards, live user update logging, and granular user settings boards.",
-      image: "https://unsplash.com",
+      image: "b",
       tags: ["React", "Tailwind", "Firebase"],
       category: "Web Apps",
       demoUrl: "https://example.com",
@@ -102,7 +106,7 @@ export default function Project() {
     {
       title: "Component Library System",
       description: "Comprehensive React UI kit configured with over 50+ lightweight layout primitives optimized for atomic theme token deployments.",
-      image: "https://unsplash.com",
+      image: "c",
       tags: ["React", "TypeScript", "Tailwind"],
       category: "UI Components",
       demoUrl: "https://example.com",
@@ -110,13 +114,50 @@ export default function Project() {
     }
   ];
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      threshold: 0.15, // Triggers when 15% of the projects grid enters the viewport
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Snappy 10ms execution delay after entry detection
+          setTimeout(() => {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+          }, 10);
+
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+          }
+        }
+      });
+    }, observerOptions);
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   // Dynamic filter computing rule properties
   const filteredProjects = activeTab === 'All' 
     ? projectsData 
     : projectsData.filter(proj => proj.category === activeTab);
 
   return (
-    <section id="projects" className="relative z-10 pt-20 pb-20 border-t border-gray-900/60 w-full flex flex-col items-center">
+    <section 
+      id="projects" 
+      ref={sectionRef}
+      className="relative z-10 pt-20 pb-20 border-t border-gray-900/60 w-full flex flex-col items-center transform opacity-0 translate-y-8 transition-all duration-500 ease-out will-change-[opacity,transform]"
+    >
       
       {/* Structural Central Text Content Header Block */}
       <div className="text-center max-w-xl mb-12 flex flex-col items-center space-y-2">

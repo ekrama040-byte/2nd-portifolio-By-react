@@ -100,10 +100,10 @@ export default function Skills() {
             <h4 className="text-gray-200 text-base font-extrabold tracking-tight border-l-2 border-green-500 pl-3 mb-1">
               Frontend Development
             </h4>
-            <DetailedSkillItem name="React.js" duration="3+ years" percentage={95} levelTag="Expert" levelColor="text-green-400 border-green-500/30" icon="⚛️" />
-            <DetailedSkillItem name="JavaScript" duration="4+ years" percentage={90} levelTag="Expert" levelColor="text-green-400 border-green-500/30" icon="🟨" />
-            <DetailedSkillItem name="TypeScript" duration="2+ years" percentage={80} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="🔷" />
-            <DetailedSkillItem name="Next.js" duration="2+ years" percentage={85} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="▲" />
+            <DetailedSkillItem name="React.js" duration="1 years" percentage={95} levelTag="Advanced" levelColor="text-green-400 border-green-500/30" icon="⚛️" />
+            <DetailedSkillItem name="JavaScript" duration="1 years" percentage={90} levelTag="Expert" levelColor="text-green-400 border-green-500/30" icon="🟨" />
+            <DetailedSkillItem name="TypeScript" duration="1 years" percentage={80} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="🔷" />
+            <DetailedSkillItem name="Next.js" duration="1 years" percentage={85} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="▲" />
           </div>
 
           {/* Box Pillar 2: Backend & APIs Container Column */}
@@ -111,8 +111,8 @@ export default function Skills() {
             <h4 className="text-gray-200 text-base font-extrabold tracking-tight border-l-2 border-green-500 pl-3 mb-1">
               Backend & APIs
             </h4>
-            <DetailedSkillItem name="Node.js" duration="2+ years" percentage={75} levelTag="Intermediate" levelColor="text-emerald-500 border-emerald-500/20" icon="🟢" />
-            <DetailedSkillItem name="REST APIs" duration="3+ years" percentage={85} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="🌐" />
+            <DetailedSkillItem name="Node.js" duration="1 years" percentage={75} levelTag="Intermediate" levelColor="text-emerald-500 border-emerald-500/20" icon="🟢" />
+            <DetailedSkillItem name="REST APIs" duration="1 years" percentage={85} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="🌐" />
           </div>
 
           {/* Box Pillar 3: Tools & Others Container Column */}
@@ -120,10 +120,10 @@ export default function Skills() {
             <h4 className="text-gray-200 text-base font-extrabold tracking-tight border-l-2 border-green-500 pl-3 mb-1">
               Tools & Others
             </h4>
-            <DetailedSkillItem name="Git & GitHub" duration="4+ years" percentage={90} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="🐙" />
-            <DetailedSkillItem name="Responsive Design" duration="3+ years" percentage={95} levelTag="Expert" levelColor="text-green-400 border-green-500/30" icon="📱" />
-            <DetailedSkillItem name="Figma" duration="2+ years" percentage={70} levelTag="Intermediate" levelColor="text-emerald-500 border-emerald-500/20" icon="🎨" />
-            <DetailedSkillItem name="Vite" duration="1+ years" percentage={85} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="⚡" />
+            <DetailedSkillItem name="Git & GitHub" duration="1 years" percentage={90} levelTag="Advanced" levelColor="text-emerald-400 border-emerald-500/30" icon="🐙" />
+            <DetailedSkillItem name="Responsive Design" duration="1 years" percentage={95} levelTag="Expert" levelColor="text-green-400 border-green-500/30" icon="📱" />
+            <DetailedSkillItem name="Figma" duration="1 years" percentage={70} levelTag="Intermediate" levelColor="text-emerald-500 border-emerald-500/20" icon="🎨" />
+            <DetailedSkillItem name="Vite" duration="1 years" percentage={85} levelTag="Intermediate" levelColor="text-emerald-400 border-emerald-500/30" icon="⚡" />
           </div>
 
         </div>
